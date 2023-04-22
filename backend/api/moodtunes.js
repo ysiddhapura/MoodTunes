@@ -18,8 +18,26 @@ class moodtunes {
         max_tokens: 1000,
       });
       const test = response.data.choices[0].text;*/
-      const test = "\n\n\"Happy\" by Pharrell Williams\n\"Don't Worry, Be Happy\" by Bobby McFerrin\n\"Can't Stop the Feeling!\" by Justin Timberlake\n\"Uptown Funk\" by Mark Ronson ft. Bruno Mars\n\"Good Life\" by OneRepublic"
-        res.json({
+
+       const test = "\n\n\"Happy\" by Pharrell Williams\n\"Don't Worry, Be Happy\" by Bobby McFerrin\n\"Can't Stop the Feeling!\" by Justin Timberlake\n\"Uptown Funk\" by Mark Ronson ft. Bruno Mars\n\"Good Life\" by OneRepublic";
+
+      const lines = test.split("\n").filter(line => line.trim() !== '');
+      
+      const songs = [];
+      const artists = [];
+      
+      lines.forEach(line => {
+        const [song, artist] = line.split(" by ");
+        songs.push(song.trim().slice(1, -1));
+        artists.push(artist.trim());
+      });
+      
+      // console.log(songs);
+      // console.log(artists);
+
+      
+
+      res.json({
             test: test,
         });
     }
