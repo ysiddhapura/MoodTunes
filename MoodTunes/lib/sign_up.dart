@@ -7,7 +7,7 @@ class SignupPage extends StatefulWidget {
 
 class _SignupPageState extends State<SignupPage> {
   final _formKey = GlobalKey<FormState>();
-  String _name, _email, _password;
+  String? _name, _email, _password;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class _SignupPageState extends State<SignupPage> {
               children: [
                 TextFormField(
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value?.isEmpty ?? true) {
                       return 'Please enter your name';
                     }
                     return null;
@@ -35,7 +35,7 @@ class _SignupPageState extends State<SignupPage> {
                 SizedBox(height: 16),
                 TextFormField(
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value?.isEmpty ?? true) {
                       return 'Please enter your email';
                     }
                     return null;
@@ -49,7 +49,7 @@ class _SignupPageState extends State<SignupPage> {
                 TextFormField(
                   obscureText: true,
                   validator: (value) {
-                    if (value.isEmpty) {
+                    if (value?.isEmpty ?? true) {
                       return 'Please enter your password';
                     }
                     return null;
@@ -62,8 +62,8 @@ class _SignupPageState extends State<SignupPage> {
                 SizedBox(height: 16),
                 RaisedButton(
                   onPressed: () {
-                    if (_formKey.currentState.validate()) {
-                      _formKey.currentState.save();
+                    if (_formKey.currentState?.validate() ?? false) {
+                      _formKey.currentState?.save();
                       // TODO: Perform signup action
                     }
                   },
@@ -77,4 +77,3 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 }
-
