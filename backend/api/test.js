@@ -7,23 +7,30 @@ class test{
         const token = await getAccessToken();
         const songName = "Shape of you"
         const artistName = "Ed Sheeran"
-        console.log(token)
         const query = encodeURIComponent(`track:${songName} artist:${artistName}`);
         const url = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`;
       
-        const headers = {
-            'Authorization': `Bearer ${token}`
-          };
-        
-          try {
-            const response = await axios.get(url, { headers: headers });
-            
-            const data = response.data;
-            res.send(response)
-          } catch (e) {
-            res.status(500).json({error:e.message});
-          }
-      
+      ////
+      axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        }
+      })
+      .then((resAxios) => {
+        //console.log(resAxios.data)
+        let spotifyResult = resAxios.data;
+        let url = spotifyResult.tracks.items[0].external_urls.spotify;
+        let songName = spotifyResult.tracks.items[0].name;
+        let artistName = spotifyResult.tracks.items[0].artists[0].name;
+  res.json({
+    url: url,
+    songName: songName,
+    artistName: artistName
+  })
+      })
+      .catch((error) => {
+        console.error(error)
+      })
       
     }
 
