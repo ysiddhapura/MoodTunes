@@ -4,9 +4,11 @@ const dotenv = require("dotenv");
 
 class test{
     static async gettest(req, res){
+        //console.log(req)
         const token = await getAccessToken();
-        const songName = "Shape of you"
-        const artistName = "Ed Sheeran"
+        const songName = req.body.songName
+        console.log(songName)
+        const artistName = req.body.artistName
         const query = encodeURIComponent(`track:${songName} artist:${artistName}`);
         const url = `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`;
       

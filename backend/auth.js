@@ -36,7 +36,7 @@ const getAccessToken = async () => {
     const token_data = await response.json();
     accessTokenCache.value = token_data.access_token;
     accessTokenCache.expiresAt = Date.now() + (token_data.expires_in - 60) * 1000; // Subtracting 60 seconds to account for network latency
-    console.log(accessTokenCache)
+
     return accessTokenCache.value;
   } else {
     throw new Error(`Error: ${response.status}`);

@@ -1,5 +1,6 @@
 const dotenv = require('dotenv');
 const { Configuration, OpenAIApi } = require("openai");
+const axios = require("axios");
 class moodtunes {
     static async getSongsbyMood(req,res) {
         //console.log(req.query.mood);
@@ -31,15 +32,22 @@ class moodtunes {
         songs.push(song.trim().slice(1, -1));
         artists.push(artist.trim());
       });
-      
-      // console.log(songs);
-      // console.log(artists);
+      const songName = "Shape of you"
+        const artistName = "Ed Sheeran"
+        const data = {
+            songName: songs[0],
+            artistName: artists[0]
+        }
+      axios.get('http://localhost:8000/api/v1/moodtunes/test',{data})
+      .then((resAxios) => {
+        
+        return res.json(resAxios.data)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
 
-      
-
-      res.json({
-            test: test,
-        });
+    
     }
 }
 
