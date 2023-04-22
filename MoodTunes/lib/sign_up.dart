@@ -12,6 +12,9 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Signup Page'),
+      ),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -60,11 +63,12 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 SizedBox(height: 16),
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
                       _formKey.currentState?.save();
                       // TODO: Perform signup action
+                      Navigator.pop(context); // Go back to previous screen
                     }
                   },
                   child: Text('Signup'),
