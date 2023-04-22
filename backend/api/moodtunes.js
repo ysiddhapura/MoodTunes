@@ -6,7 +6,7 @@ class moodtunes {
         //console.log(req.query.mood);
         const mood = req.body.mood;
         const query = `user wants ${mood}, recommend me 5 songs and their artists, one song per line in the format: Song Title by Artist Name.`
-        /*
+        
         const configuration = new Configuration({
             apiKey: process.env.GPT_AUTH,
           });
@@ -18,9 +18,9 @@ class moodtunes {
         temperature: 0,
         max_tokens: 1000,
       });
-      const test = response.data.choices[0].text;*/
+      const test = response.data.choices[0].text;
 
-       const test = "\n\n\"Happy\" by Pharrell Williams\n\"Don't Worry, Be Happy\" by Bobby McFerrin\n\"Can't Stop the Feeling!\" by Justin Timberlake\n\"Uptown Funk\" by Mark Ronson ft. Bruno Mars\n\"Good Life\" by OneRepublic";
+       //const test = "\n\n\"Happy\" by Pharrell Williams\n\"Don't Worry, Be Happy\" by Bobby McFerrin\n\"Can't Stop the Feeling!\" by Justin Timberlake\n\"Uptown Funk\" by Mark Ronson ft. Bruno Mars\n\"Good Life\" by OneRepublic";
 
       const lines = test.split("\n").filter(line => line.trim() !== '');
       
@@ -29,25 +29,23 @@ class moodtunes {
       
       lines.forEach(line => {
         const [song, artist] = line.split(" by ");
-        songs.push(song.trim().slice(1, -1));
-        artists.push(artist.trim());
+        songs.push(song.trim().slice(1, -1).replaceAll("[^A-Za-z0-9]",""));
+        artists.push(artist.trim().replaceAll("[^A-Za-z0-9]",""));
       });
-      const songName = "Shape of you"
-        const artistName = "Ed Sheeran"
-        const data = {
-            songName: songs[0],
-            artistName: artists[0]
-        }
-      axios.get('http://localhost:8000/api/v1/moodtunes/test',{data})
-      .then((resAxios) => {
+      console.log(songs);
+      let songarray = [];
+        let data = {}
+        for(let i = 0; i <songs.length; i++){
+            data = {
+                songName: songs[i],
+                artistName: artists[i]
+            }
         
-        return res.json(resAxios.data)
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-
-    
+      const resp = await axios.get('http://localhost:8000/api/v1/moodtunes/test',{data})
+      //console.log(resp)
+      songarray.push(resp.data)
+    }
+    return res.json({rep:songarray})
     }
 }
 
