@@ -102,7 +102,17 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                       ),
                     ],
                   ),
-                  onTap: () => launch(song['url']),
+
+                  // InkWell(
+                  //   onTap: () => launch(song['url']),
+                  //   child: Text(
+                  //     'Click me!',
+                  //     style: TextStyle(
+                  //       fontSize: 18.0,
+                  //     ),
+                  //   ),
+                  //   )
+                  // onTap: () => launch(song['url']),
                 ),
               ),
             ).toList(),

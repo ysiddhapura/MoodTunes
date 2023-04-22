@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
 
 class SignupPage extends StatefulWidget {
   @override
@@ -63,16 +64,20 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                 ),
                 SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      _formKey.currentState?.save();
-                      // TODO: Perform signup action
-                      Navigator.pop(context); // Go back to previous screen
-                    }
-                  },
-                  child: Text('Signup'),
-                ),
+               ElevatedButton(
+                onPressed: () {
+                  if (_formKey.currentState?.validate() ?? false) {
+                    _formKey.currentState?.save();
+                    // TODO: Perform signup action
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MyHomePage(title: 'Mood Songs')),
+                    );
+                  }
+                },
+                child: Text('Signup'),
+              ),
               ],
             ),
           ),
