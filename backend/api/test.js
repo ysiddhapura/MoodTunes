@@ -33,7 +33,17 @@ class test{
       })
       
     }
-
+    /*
+    function a{
+        req.text = //query
+        //input qeury in chat gptprompt
+        //response will have a huge text
+        //split into 5
+        //for loop and search for each song
+            //we package into json
+        //res json will have array of json
+    }*/
+    
     
 }
 
